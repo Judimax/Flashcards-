@@ -8,12 +8,10 @@ class Flashcards:
             self.term = ""
             self.description= ""
         
-    
-
     def __init__(self):
 
-        self.terms = []
-        self.descriptions = []
+        self.flashcards = dict()
+        
     def input(self):
 
         term = input("What is the term")
@@ -22,7 +20,6 @@ class Flashcards:
 
     def random(self):
         
-
         dictictionary = dict()
 
         for i in self.terms:
@@ -42,10 +39,18 @@ for i in range(7):
     terms = input("Please input terms")
     definition = input("Please input definition")
 
-    Archaelogy.terms.append(terms)
-    Archaelogy.terms.append(definition)
+    Archaelogy.Card.term = terms
+    Archaelogy.Card.description = definition
+    
+    Archaelogy.flashcards[Archaelogy.Card.term] =Archaelogy.Card.description
+    
+    Archaelogy.Card.term = ""
+    Archaelogy.Card.description = ""
+    
 
 query = input("Please type in input and definition")
+
+print(Archaelogy.flashcards)
     
 
 
