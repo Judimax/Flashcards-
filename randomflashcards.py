@@ -33,11 +33,11 @@ for i in range(7):
     terms = input("Please input terms")
     definition = input("Please input definition")
 
-    Archaelogy.flashcards[terms] =Archaelogy.Card.definition
+    Archaelogy.flashcards[terms] =definition
     
     
 
-query = input("Please type in input and definition")
+query = input("Please type in term")
 
 print(Archaelogy.flashcards)
     
