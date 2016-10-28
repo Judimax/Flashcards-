@@ -30,18 +30,26 @@ class Flashcards:
 Archaelogy = Flashcards()
 
 for i in range(7):
-    terms = input("Please input terms")
-    definition = input("Please input definition")
+    terms = input("Please input terms  ")
+    definition = input("Please input definition   ")
 
     Archaelogy.flashcards[terms] =definition
+
+    answer= input("Are you done with the flashcard  ")
     
     
+while True:
+                  
+    query = input("Please type in term  ")
 
-query = input("Please type in term")
+    for i in Archaelogy.flashcards.keys():
 
-print(Archaelogy.flashcards)
+        if i == query:
+            print(Archaelogy.flashcards[i])
+            break
+                  
     
-
+    
 
         
         
