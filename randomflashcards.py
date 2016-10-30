@@ -1,4 +1,5 @@
-from random import *
+import random
+import time
 class Flashcards:
 
         
@@ -7,15 +8,57 @@ class Flashcards:
         self.flashcards = dict()
 
     def play_a_game(self):
-
-        print("Lets play Flashcards and Your Mind!!!")      
-        for i in self.flashcards.keys():
-            print("What is" + i + "?")
-
-
         
+        print("\n")
+        print("Lets play Flashcards and Your Mind!!!\n")
+        answer_i = "default"
 
+        while answer_i != "q":
+            print("If you want to quit at any time press q")
+            
+            for i in self.flashcards.keys():
+                print("What is" + i + "?")
+                answer_i = input("     ")
 
+                if answer_i == "q":
+                    break
+                randomizer = 0
+                attempts = 0
+
+                while True:
+
+                    if attempts != 0:
+                        answer_i = input("What is  " + i + " ? ")
+                        
+                        if answer_i == "q":
+                            break
+                        
+                    if randomizer == 0:
+                        print("Alright lets check\n")
+                        print("...")
+                        time.sleep(5)
+                        if answer_i == self.flashcards[i]:
+                            print("Alright you got it!")
+                            break
+                        else:
+                            print("No you didn't get it try again")
+                            attempts += 1
+                            
+    def studY(self):
+        while True:
+                          
+            query = input("Please type in term  ")
+            a=0
+            
+            for i in self.flashcards.keys():
+
+                if i == query:
+                    print(self.flashcards[i])
+                    a=1
+                    break
+            if a==0:
+                print("Could not find search term, would you like to try another?")
+                            
 Archaelogy = Flashcards()
 
 for i in range(7):
@@ -37,20 +80,6 @@ if then.find("study") != -1:
         
     
     
-while True:
-                  
-    query = input("Please type in term  ")
-    a=0
-    
-    for i in Archaelogy.flashcards.keys():
-
-        if i == query:
-            print(Archaelogy.flashcards[i])
-            a=1
-            break
-    if a==0:
-        print("Could not find search term, would you like to try another?")
-
                   
     
     
