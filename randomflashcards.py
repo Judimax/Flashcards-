@@ -1,5 +1,8 @@
 import random
 import time
+import os
+import sys
+
 class Flashcards:
 
         
@@ -11,6 +14,7 @@ class Flashcards:
         
         print("\n")
         print("Lets play Flashcards and Your Mind!!!\n")
+        self.flashcards = self.flashcards
         answer_i = "default"
 
         while answer_i != "q":
@@ -42,7 +46,10 @@ class Flashcards:
                             print("Alright you got it!")
                             break
                         else:
-                            print("No you didn't get it try again")
+                            if attmepts % 2 == 0:
+                                print("No you didn't get it try again")
+                            else:
+                                print("Are you sure? try again")
                             attempts += 1
                             
     def studY(self):
@@ -68,42 +75,56 @@ class Flashcards:
                     print(str(self.flashcards))
                     return
                 terms = str(input("Please input terms  "))
-                definition = str(input("Please input definition   "))
+                definition = str(input("Please input definition   "))             
+                if  definition.find(',') != -1:
+                    definition = definition.split(",")
+
                 self.flashcards[terms] =definition 
         except:
             print("Place quotes")
             self.add()
 
-    def save(self):
+    def save(self,ginit):
 
-        final = open("fina.txt","w")
+        final = open(ginit,"w")
         for i,j in self.flashcards.items():
-            i += "+"
+            i += "$"
             final.write(i)
             final.flush()
-            final.write(j)
-            final.flush()
+            if type(j) == list:
+                for defs in j:
+                    final.write(str(defs)+ ",")
+                    final.flush()
+            else:
+                final.write(j)
+                final.flush()
             final.write("\n")
             final.flush()
         final.close()
 
-    def load(self):
-        final = open("fina.txt","r")
+    def load(self,ok):
+        
+        final = open(ok,"r")
         flash = final.read().splitlines()
         for i in flash:
-            print(len(flash))
-        for i in flash:
-            i  = i.split("+")
+            i  = i.split("$")
+            print(i)
+            if i[1].find(",") != -1:
+                i[1] = i[1].split(',')
+                print(type(i[1]))
+                print("\n")
             self.flashcards[i[0]]= i[1]
-        print(str(self.flashcards))
         final.close()
         return 
 
 
 def main():
         Archaelogy = Flashcards()
+        gisher = ""
+        print(str(Archaelogy.flashcards))
+        
         while True:
-
+                        
             then= input("What would you like to do next?")
             if then.find("play") != -1:
                 Archaelogy.play_a_game()
@@ -115,10 +136,14 @@ def main():
                 Archaelogy.add()
 
             if then.find("save") != -1:
-                Archaelogy.save()
-                            
+                gisher = input("save as")
+                Archaelogy.save(gisher)
+                                        
             if then.find("load") != -1:
-                Archaelogy.load()
+                gisher = input("which file")
+                Archaelogy.load(gisher)
+
+
 
 
 main()
