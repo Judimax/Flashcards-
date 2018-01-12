@@ -1,4 +1,7 @@
 from __future__ import print_function
+
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import random
 import time
 import os
@@ -13,6 +16,27 @@ class Flashcards:
         self.flashcards = dict()
 
 
+    def add_pictures(self):
+
+        for i in range(len(self.flashcards.keys())):
+            if str(self.flashcards.values()[i]).find("tdddddd") != -1:
+                print(self.flashcards.keys()[i],end = ',')
+                print(self.flashcards.values()[i],end = ',')
+
+    def put_in_picture(self,defs):
+        print("////////////////////////////////////")
+        print("/                                  /")
+        print("/                                  /")
+        print("/                                  /")
+        print("/                                  /")
+        print("/"          +str(defs)+  "         /")
+        print("/                                  /")
+        print("/                                  /")
+        print("/                                  /")
+        print("/                                  /")
+        print("/                                  /")
+        print("////////////////////////////////////")      
+                
     def play_a_game(self):
         
         print("\n")
@@ -32,17 +56,30 @@ class Flashcards:
                 "remember to do if else version to, show how you know how to shorten code bullet_points"
                 for j in range(len(self.flashcards[i])):
                     time.sleep(.5)
-                    '''if len(self.flashcards[i][j]) == 0:
+                    if len(self.flashcards[i][j]) == 0:
 
                         break
-                    answer_i = input("What is  " + i + " ? ")'''
+                    try:
+                        answer_i = input("What is  " + i + " ? ")
+                    except:
+                        answer_i = 'skip'
                             
                     if answer_i == "q":
                         return
+                    
                     elif answer_i == "skip":
+                        randomizer += 1
+                        if randomizer % 17 == 0:
+                            print("hey gotta study man I can't keep giving answers like this")
                         print('alright')
                         print(i)
-                        print(self.flashcards[i][j])
+                        if self.flashcards[i][j].find('PNG') != -1:
+                            
+                            img = mpimg.imread('flashcardpictures/' +self.flashcards[i][j])
+                            plt.imshow(img)
+                            plt.show()
+                        else:
+                           self.put_in_picture(self.flashcards[i][j])
                         pass
                             
                           
@@ -50,7 +87,11 @@ class Flashcards:
                         print("Alright lets check\n")
                         print("...")
                         time.sleep(5)
-                        if answer_i == self.flashcards[i][j]:
+                        if self.flashcards[i][j].find('PNG') != -1:
+                            img = mpimg.imread('flashcardpictures/' +flashcards[i][j])
+                            plt.imshow(img)
+                            plt.show()
+                        elif answer_i == self.flashcards[i][j]:
                             print("Alright you got it in" + attempts + "tries!,")
                             break
                         else:
@@ -131,7 +172,7 @@ class Flashcards:
 
 def main():
         Archaelogy = Flashcards()
-        #Archaelogy.load('network.txt')
+        Archaelogy.load('network.txt')
         gisher = ""
 
         
@@ -154,6 +195,12 @@ def main():
             if then.find("load") != -1:
                 gisher = input("which file")
                 Archaelogy.load(gisher)
+
+            if then.find("image") != -1:
+                Archaelogy.add_pictures()
+
+            elif then.find("i") != -1:
+                sys.exit()
 
 
 

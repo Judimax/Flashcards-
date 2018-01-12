@@ -2,6 +2,7 @@ import random
 import time
 import os
 import sys
+import Image
 
 class Flashcards:
 
@@ -10,43 +11,49 @@ class Flashcards:
 
         self.flashcards = dict()
 
+
     def play_a_game(self):
         
         print("\n")
         print("Lets play Flashcards and Your Mind!!!\n")
-        self.flashcards = self.flashcards
-        answer_i = "default"
+        answer_i = "skip"
 
         while answer_i != "q":
-            print("If you want to quit at any time press q")
-            time.sleep(3)
             
-            for i in self.flashcards.keys():
-                print("What is" + i + "?")
-                answer_i = input("     ")
-
-                if answer_i == "q":
-                    break
+            print("If you want to quit at any time press q")
+            keys = self.flashcards.keys()
+            random.shuffle(keys)
+            for i in keys:
+                
                 randomizer = 0
                 attempts = 0
 
-                while True:
+                "remember to do if else version to, show how you know how to shorten code bullet_points"
+                for j in range(len(self.flashcards[i])):
+                    time.sleep(.5)
+                    '''if len(self.flashcards[i][j]) == 0:
 
-                    if attempts != 0:
-                        answer_i = input("What is  " + i + " ? ")
-                        
-                        if answer_i == "q":
-                            break
-                        
-                    if randomizer == 0:
+                        break
+                    answer_i = input("What is  " + i + " ? ")'''
+                            
+                    if answer_i == "q":
+                        return
+                    elif answer_i == "skip":
+                        print('alright')
+                        print(i)
+                        print(len(self.flashcards[i][j]))
+                        pass
+                            
+                          
+                    elif randomizer == 0:
                         print("Alright lets check\n")
                         print("...")
                         time.sleep(5)
-                        if answer_i == self.flashcards[i]:
-                            print("Alright you got it!")
+                        if answer_i == self.flashcards[i][j]:
+                            print("Alright you got it in" + attempts + "tries!,")
                             break
                         else:
-                            if attmepts % 2 == 0:
+                            if attempts % 2 == 0:
                                 print("No you didn't get it try again")
                             else:
                                 print("Are you sure? try again")
@@ -76,27 +83,28 @@ class Flashcards:
                     return
                 terms = str(input("Please input terms  "))
                 definition = str(input("Please input definition   "))             
-                if  definition.find(',') != -1:
-                    definition = definition.split(",")
-
-                self.flashcards[terms] =definition 
+                if True: definition = definition.split(",")
+                self.flashcards[terms] = definition
+                
         except:
             print("Place quotes")
             self.add()
 
     def save(self,ginit):
 
+        self.flashcards = self.flashcards
         final = open(ginit,"w")
         for i,j in self.flashcards.items():
             i += "$"
             final.write(i)
             final.flush()
-            if type(j) == list:
-                for defs in j:
-                    final.write(str(defs)+ ",")
-                    final.flush()
-            else:
-                final.write(j)
+            j = j.split(",")
+            # turn all def -> list for play method
+            for defs in j:
+                if defs != j[-1]:
+                    final.write(str(defs) + ',')
+                else:
+                    final.write(str(defs))
                 final.flush()
             final.write("\n")
             final.flush()
@@ -109,10 +117,10 @@ class Flashcards:
         for i in flash:
             i  = i.split("$")
             print(i)
-            if i[1].find(",") != -1:
-                i[1] = i[1].split(',')
-                print(type(i[1]))
-                print("\n")
+            # turn all def -> list for play method
+            i[1] = i[1].split(',')
+            print(type(i[1]))
+            print("\n")
             self.flashcards[i[0]]= i[1]
         final.close()
         return 
@@ -120,8 +128,9 @@ class Flashcards:
 
 def main():
         Archaelogy = Flashcards()
+        Archaelogy.load('network.txt')
         gisher = ""
-        print(str(Archaelogy.flashcards))
+
         
         while True:
                         

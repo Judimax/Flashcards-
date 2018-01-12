@@ -1,0 +1,25 @@
+HTTP$  protocol used to communicate between Web browsers and Web servers, request/response protocol, uses TCP, stateless
+nodal processing$ check bit errors
+non-persistent HTTP$ 2 RTT,  os overhead fr each connection,  browers runs parallel TCP's 
+non-persistent HTTP issues$ 2 RTT's per object,  OS overhead for each TCP,  open parallel TCP to get objects
+Routing protocols$ RIP, OSPF, BGP
+queueing delay$ congestion level
+Jacobson Karels$DevRTT = (1-BB)*DevRTT +BB*(|SampleRTT-EstimatedRTT| )(typically, BB = 0.25),TimeoutInterval = EstimatedRTT + 4*DevRTT
+TCP$ connection setup comm transfer
+TCP RTT$EstimatedRTT = (1- aa)*EstimatedRTT + aa*SampleRTT, exp. weighted moving average, influence of past sample decreases, usually aa =.125
+RTT$ Round Trip Time packet get to node B response to node A
+Encapsulation$tdddddd 7
+IP$ network routing protocol for sending items to proper IP address
+persistent HTTP$ leaves connection open, 1 RTT for objects
+SMTP$  exchange electronic mail
+propagation delay$ d = len phys link s= speed of light  dprop= D/S
+transmission delay$ L= packet length R = link     dtrans = L/R
+DNS$tdddddd 12 goes through severs to find right server
+3-way handshake$tdddddddd 23-24
+Circuit Switching$ Dedicated resources no sharing, Guaranteed performance,Idle if not used by call
+dnodal$ dproc + dqueue + dtrans + dprop
+UDP$ no connection communication transfer
+Packet Switching$ Allow more users to network, Gr8 for data sparks , Resource sharing , No call setup
+queue$ if buffer fills up packets can be lost
+store-and-forward$ L = Mbis R = Mbps L/R,  how many secconds
+Congestion Control$tdddddd 25
